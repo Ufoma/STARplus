@@ -1,34 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Accounting Calculator</h1>
-    <form id="cash-flow-form">
-        <label for="initial-investment">Initial Investment:</label>
-        <input type="number" id="initial-investment" name="initial_investment"><br><br>
-        <label for="monthly-inflows">Monthly Inflows:</label>
-        <input type="number" id="monthly-inflows" name="monthly_inflows"><br><br>
-        <label for="monthly-outflows">Monthly Outflows:</label>
-        <input type="number" id="monthly-outflows" name="monthly_outflows"><br><br>
-        <label for="years">Years:</label>
-        <input type="number" id="years" name="years"><br><br>
-        <button id="calculate-button">Calculate Cash Flow</button>
-    </form>
-    <div id="cash-flow-results"></div>
-
-    <h1>Depreciation Calculator</h1>
-    <form id="depreciation-form">
-        <label for="cost">Cost:</label>
-        <input type="number" id="cost" name="cost"><br><br>
-        <label for="salvage-value">Salvage Value:</label>
-        <input type="number" id="salvage-value" name="salvage_value"><br><br>
-        <label for="useful-life">Useful Life:</label>
-        <input type="number" id="useful-life" name="useful_life"><br><br>
-        <label for="rate">Rate:</label>
-        <input type="number" id="rate" name="rate"><br><br>
-        <label for="periods">Periods:</label>
-        <input type="number" id="periods" name="periods"><br><br>
-        <button id="calculate-button">Calculate Depreciation</button>
-    </form>
-    <div id="depreciation-results"></div>
-
+<div class="banner">
+    <!-- <h2>STARplus</h2> -->
+    <!-- in this h2 I might add style to enable the anytime and anywhere to show after another -->
+    <h2>Control your finances <!-- anytime, --> anywhere</h2>
+    <p>Spend wisely, save consistently, invest smartly, and calculate your expenses effortlessly.</p>
+</div>
+<div class="button-container">
+    <button>Use Our Online Calculator – It's Free !</button>
+</div>
 {% endblock %}

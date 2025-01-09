@@ -3,9 +3,11 @@ from depreciation import straight_line_depreciation, reducing_balance_depreciati
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/calculate_depreciation', methods=['POST'])
 def calculate_depreciation():
@@ -16,13 +18,16 @@ def calculate_depreciation():
     rate = float(data['rate'])
     periods = int(data['periods'])
 
-    straight_line_depreciation_result = straight_line_depreciation(cost, salvage_value, useful_life)
-    reducing_balance_depreciation_result = reducing_balance_depreciation(cost, rate, periods)
+    straight_line_depreciation_result = straight_line_depreciation(
+        cost, salvage_value, useful_life)
+    reducing_balance_depreciation_result = reducing_balance_depreciation(
+        cost, rate, periods)
 
     return jsonify({
         'straight_line_depreciation': straight_line_depreciation_result,
         'reducing_balance_depreciation': reducing_balance_depreciation_result
     })
+
 
 if __name__ == '__main__':
     app.run(debug=True)

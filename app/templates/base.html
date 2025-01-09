@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STAR &plus;</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <title>STARplus - Online Calculator</title>
 </head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+<body>
+    <div>
+
+        <div class="header">
+            <h2>STARplus</h2>
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Calculator</li>
+                    <li>Stats</li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main">
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="footer">
+            <nav class="social">
+                <ul>
+                    <li><a href="https://x.com/Dy_mond_in_sky" target="_blank">
+                            <img src="{{url_for('static', filename='image/twitter.png')}}" alt="X.com"></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/in/ufomaifende/" target="_blank">
+                            <img src="{{url_for('static', filename='image/linkedin.png')}}" alt="Linkedin"></a>
+                    </li>
+                    <li><a href="http://github.com/Ufoma" target="_blank">
+                            <img src="{{ url_for('static', filename='image/github.png')}}" alt="github"></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
+
 </html>

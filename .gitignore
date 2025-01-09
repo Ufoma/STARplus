@@ -34,3 +34,5 @@ coverage/
 *.egg-info/
 dist/
 build/
+
+myenv/
