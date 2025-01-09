@@ -1,3 +1,36 @@
 .vscode
 # Ignore virtual environment
 env/
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+*.env
+
+# Logs
+*.log
+
+# Heroku
+*.pid
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Byte-compiled/Optimized/Compiled files
+*.pyo
+*.pyc
+*.pyd
+
+# Test coverage
+coverage/
+*.coverage
+*.cover
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
