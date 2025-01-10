@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Time Value of Money Calculator</h1>
-    <form id="tvm-form">
-        <label for="present-value">Present Value:</label>
-        <input type="number" id="present-value" name="present_value"><br><br>
-        <label for="future-value">Future Value:</label>
-        <input type="number" id="future-value" name="future_value"><br><br>
-        <label for="interest-rate">Interest Rate:</label>
-        <input type="number" id="interest-rate" name="interest_rate"><br><br>
-        <label for="periods">Periods:</label>
-        <input type="number" id="periods" name="periods"><br><br>
-        <button id="calculate-button">Calculate</button>
-    </form>
-    <div id="tvm-results"></div>
+<h1>Time Value of Money Calculator</h1>
+<form id="tvm-form">
+    <label for="present-value">Present Value:</label>
+    <input type="number" id="present-value" name="present_value"><br><br>
+    <label for="future-value">Future Value:</label>
+    <input type="number" id="future-value" name="future_value"><br><br>
+    <label for="interest-rate">Interest Rate:</label>
+    <input type="number" id="interest-rate" name="interest_rate"><br><br>
+    <label for="periods">Periods:</label>
+    <input type="number" id="periods" name="periods"><br><br>
+    <button id="calculate-button">Calculate</button>
+</form>
+<div id="tvm-results"></div>
 {% endblock %}
