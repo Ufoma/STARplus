@@ -9,6 +9,16 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/accounting')
+def accounting():
+    return render_template('calculator/accounting.html')
+
+
+@app.route('/depreciation')
+def depreciation():
+    return render_template('calculator/depreciation.html')
+
+
 @app.route('/calculate_depreciation', methods=['POST'])
 def calculate_depreciation():
     data = request.get_json()

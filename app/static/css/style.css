@@ -84,13 +84,16 @@ button:hover {
   color: black;
   border: 1px solid black;
 }
+/* ==== Link */
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
+a:visited {
+  color: inherit;
+}
 /* ==== Footer */
-
-/* .footer {
-  display: flex;
-  flex-direction: column;
-} */
 
 .footer ul {
   display: flex;
@@ -98,3 +101,5 @@ button:hover {
   justify-content: end;
   padding: 10px;
 }
+
+/* ==== cal.html */

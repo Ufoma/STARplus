@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <h1>Depreciation Calculator</h1>
+    <div class="action">
+        <button type="button" onclick="location.href='{{ url_for('accounting') }}'">Accounting Calclator</button>
+        <button type="submit">Depreciation Calculator</button>
+
+    </div>
+
+    <form id="depreciation-form">
+        <label for="cost">Cost:</label>
+        <input type="number" id="cost" name="cost"><br><br>
+        <label for="salvage-value">Salvage Value:</label>
+        <input type="number" id="salvage-value" name="salvage_value"><br><br>
+        <label for="useful-life">Useful Life:</label>
+        <input type="number" id="useful-life" name="useful_life"><br><br>
+        <label for="rate">Rate:</label>
+        <input type="number" id="rate" name="rate"><br><br>
+        <label for="periods">Periods:</label>
+        <input type="number" id="periods" name="periods"><br><br>
+        <button id="calculate-button">Calculate Depreciation</button>
+    </form>
+    <div id="depreciation-results"></div>
+</div>
+
+{% endblock %}

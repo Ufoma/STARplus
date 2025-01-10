@@ -2,12 +2,11 @@
 
 {% block content %}
 <div class="banner">
-    <!-- <h2>STARplus</h2> -->
     <!-- in this h2 I might add style to enable the anytime and anywhere to show after another -->
     <h2>Control your finances <!-- anytime, --> anywhere</h2>
     <p>Spend wisely, save consistently, invest smartly, and calculate your expenses effortlessly.</p>
 </div>
 <div class="button-container">
-    <button>Use Our Online Calculator – It's Free !</button>
+    <button><a href="{{url_for('accounting')}}">Use Our Online Calculator – It's Free !</a></button>
 </div>
 {% endblock %}
