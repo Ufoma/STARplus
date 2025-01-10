@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<div>
+<div class="calculator">
     <h1>Depreciation Calculator</h1>
-    <div class="action">
+    <div class="action button-container">
         <button type="button" onclick="location.href='{{ url_for('accounting') }}'">Accounting Calclator</button>
-        <button type="submit">Depreciation Calculator</button>
+        <button class="active-button" type="button">Depreciation Calculator</button>
 
     </div>
 
@@ -21,7 +21,9 @@
         <input type="number" id="rate" name="rate"><br><br>
         <label for="periods">Periods:</label>
         <input type="number" id="periods" name="periods"><br><br>
-        <button id="calculate-button">Calculate Depreciation</button>
+        <div class="button-container">
+            <button id="calculate-button">Calculate Depreciation</button>
+        </div>
     </form>
     <div id="depreciation-results"></div>
 </div>
