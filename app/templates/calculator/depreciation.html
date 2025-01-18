@@ -12,20 +12,67 @@
 
     <form id="depreciation-form">
         <label for="cost">Cost:</label>
-        <input type="number" id="cost" name="cost"><br><br>
+        <input type="number" id="cost" name="cost" required><br><br>
         <label for="salvage-value">Salvage Value:</label>
-        <input type="number" id="salvage-value" name="salvage_value"><br><br>
+        <input type="number" id="salvage-value" name="salvage_value" required><br><br>
         <label for="useful-life">Useful Life:</label>
-        <input type="number" id="useful-life" name="useful_life"><br><br>
+        <input type="number" id="useful-life" name="useful_life" required><br><br>
         <label for="rate">Rate:</label>
-        <input type="number" id="rate" name="rate"><br><br>
+        <input type="number" id="rate" name="rate" required><br><br>
         <label for="periods">Periods:</label>
-        <input type="number" id="periods" name="periods"><br><br>
+        <input type="number" id="periods" name="periods" required><br><br>
         <div class="button-container">
-            <button id="calculate-button">Calculate Depreciation</button>
+            <button id="calculate-button" type="button">Calculate Depreciation</button>
         </div>
     </form>
     <div id="depreciation-results"></div>
 </div>
+
+<script>
+    document.getElementById('calculate-button').addEventListener('click', function () {
+        // Get form data
+        const cost = parseFloat(document.getElementById('cost').value);
+        const salvageValue = parseFloat(document.getElementById('salvage-value').value);
+        const usefulLife = parseFloat(document.getElementById('useful-life').value);
+        const rate = parseFloat(document.getElementById('rate').value);
+        const periods = parseInt(document.getElementById('periods').value);
+
+        // Validate inputs
+        if (isNaN(cost) || isNaN(salvageValue) || isNaN(usefulLife) || isNaN(rate) || isNaN(periods)) {
+            alert('Please fill out all fields with valid numbers.');
+            return;
+        }
+
+        // Send data to backend (update the endpoint URL accordingly)
+        fetch('/calculate_depreciation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                cost: cost,
+                salvage_value: salvageValue,
+                useful_life: usefulLife,
+                rate: rate,
+                periods: periods
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Update the results div
+                const resultsDiv = document.getElementById('depreciation-results');
+                resultsDiv.innerHTML = '<h2>Depreciation Results:</h2>';
+
+                data.forEach((period, index) => {
+                    resultsDiv.innerHTML += `<p>Period ${index + 1}: Depreciation = ${period.depreciation.toFixed(2)}, Value = ${period.value.toFixed(2)}</p>`;
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while calculating depreciation.');
+            });
+    });
+</script>
+
 
 {% endblock %}

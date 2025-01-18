@@ -43,23 +43,50 @@ def depreciation():
 
 
 @app.route('/calculate_depreciation', methods=['POST'])
-def calculate_depreciation():
-    data = request.get_json()
-    cost = float(data['cost'])
-    salvage_value = float(data['salvage_value'])
-    useful_life = int(data['useful_life'])
-    rate = float(data['rate'])
-    periods = int(data['periods'])
+def calculate_depreciation_api():
+    try:
+        # Parse JSON data from the request
+        data = request.get_json()
+        # Default to straight-line depreciation
+        method = data.get('method', 'straight_line')
+        cost = data['cost']
+        salvage_value = data.get('salvage_value', 0)
+        useful_life = data.get('useful_life', 0)
+        rate = data.get('rate', 0)
+        periods = data.get('periods', 0)
 
-    straight_line_depreciation_result = straight_line_depreciation(
-        cost, salvage_value, useful_life)
-    reducing_balance_depreciation_result = reducing_balance_depreciation(
-        cost, rate, periods)
+        if method == 'straight_line':
+            # Perform straight-line depreciation calculation
+            annual_depreciation = straight_line_depreciation(
+                cost, salvage_value, useful_life)
+            results = [
+                {
+                    'period': year + 1,
+                    'depreciation': annual_depreciation,
+                    'value': cost - annual_depreciation * (year + 1)
+                }
+                for year in range(useful_life)
+            ]
+        elif method == 'reducing_balance':
+            # Perform reducing balance depreciation calculation
+            depreciation_schedule = reducing_balance_depreciation(
+                cost, rate, periods)
+            remaining_value = cost
+            results = []
+            for i, depreciation in enumerate(depreciation_schedule):
+                remaining_value -= depreciation
+                results.append({
+                    'period': i + 1,
+                    'depreciation': depreciation,
+                    'value': remaining_value
+                })
+        else:
+            return jsonify({'error': 'Invalid depreciation method'}), 400
 
-    return jsonify({
-        'straight_line_depreciation': straight_line_depreciation_result,
-        'reducing_balance_depreciation': reducing_balance_depreciation_result
-    })
+        return jsonify(results), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 
 if __name__ == '__main__':
