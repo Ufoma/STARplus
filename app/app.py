@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from depreciation import straight_line_depreciation, reducing_balance_depreciation
+from cashflow import *
 
 app = Flask(__name__)
 
@@ -12,6 +13,28 @@ def index():
 @app.route('/accounting')
 def accounting():
     return render_template('calculator/accounting.html')
+
+# Define the route for calculating cash flow
+
+
+@app.route('/calculate_cash_flow', methods=['POST'])
+def calculate_cash_flow_api():
+    try:
+        # Parse JSON data from the request
+        data = request.get_json()
+        initial_investment = data['initial_investment']
+        monthly_inflows = data['monthly_inflows']
+        monthly_outflows = data['monthly_outflows']
+        years = data['years']
+
+        # Perform the calculation
+        cash_flow = calculate_cash_flow(
+            initial_investment, monthly_inflows, monthly_outflows, years)
+
+        # Return the result as JSON
+        return jsonify(cash_flow), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 
 @app.route('/depreciation')

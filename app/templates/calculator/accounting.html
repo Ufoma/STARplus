@@ -11,16 +11,80 @@
 
     <form id="cash-flow-form">
         <label for="initial-investment">Initial Investment:</label>
-        <input type="number" id="initial-investment" name="initial_investment"><br><br>
+        <input type="number" id="initial-investment" name="initial_investment" required><br><br>
+
         <label for="monthly-inflows">Monthly Inflows:</label>
-        <input type="number" id="monthly-inflows" name="monthly_inflows"><br><br>
+        <input type="number" id="monthly-inflows" name="monthly_inflows" required><br><br>
+
         <label for="monthly-outflows">Monthly Outflows:</label>
-        <input type="number" id="monthly-outflows" name="monthly_outflows"><br><br>
+        <input type="number" id="monthly-outflows" name="monthly_outflows" required><br><br>
+
         <label for="years">Years:</label>
-        <input type="number" id="years" name="years"><br><br>
-        <div class="button-container"><button id="calculate-button">Calculate Cash Flow</button></div>
+        <input type="number" id="years" name="years" required><br><br>
+
+        <div class="button-container">
+            <button id="calculate-button" type="button">Calculate Cash Flow</button>
+        </div>
     </form>
-    <div id="cash-flow-results"></div>
+    <div id="cash-flow-results">
+        <p>Results will appear here after calculation.</p>
+    </div>
 </div>
+<script>
+    document
+        .getElementById('calculate-button')
+        .addEventListener('click', function () {
+            // Get form data
+            const initialInvestment = parseFloat(
+                document.getElementById('initial-investment').value
+            );
+            const monthlyInflows = parseFloat(
+                document.getElementById('monthly-inflows').value
+            );
+            const monthlyOutflows = parseFloat(
+                document.getElementById('monthly-outflows').value
+            );
+            const years = parseInt(document.getElementById('years').value);
+
+            if (
+                isNaN(initialInvestment) ||
+                isNaN(monthlyInflows) ||
+                isNaN(monthlyOutflows) ||
+                isNaN(years)
+            ) {
+                alert('Please fill out all fields with valid numbers.');
+                return;
+            }
+
+            // Send data to backend via API (update the endpoint URL accordingly)
+            fetch('calculate_cash_flow', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    initial_investment: initialInvestment,
+                    monthly_inflows: monthlyInflows,
+                    monthly_outflows: monthlyOutflows,
+                    years: years,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // Update the results div
+                    const resultsDiv = document.getElementById('cash-flow-results');
+                    resultsDiv.innerHTML = '<h2>Cash Flow Results:</h2>';
+
+                    data.forEach((monthData) => {
+                        resultsDiv.innerHTML += `
+                    <p>Month ${monthData.month}: Inflow = ${monthData.inflow}, 
+                    Outflow = ${monthData.outflow
+                            }, Balance = ${monthData.balance.toFixed(2)}</p>`;
+                    });
+                })
+                .catch((error) => console.error('Error:', error));
+        });
+
+</script>
 
 {% endblock %}

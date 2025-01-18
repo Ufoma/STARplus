@@ -17,7 +17,11 @@ def calculate_cash_flow(initial_investment, monthly_inflows, monthly_outflows, y
     for month in range(months):
         inflow = monthly_inflows
         outflow = monthly_outflows
-        balance = initial_investment + (inflow - outflow) * (month + 1)
+        # Calculate balance
+        if month == 0:
+            balance = initial_investment + inflow - outflow
+        else:
+            balance = cash_flow[-1]['balance'] + inflow - outflow
         cash_flow.append({
             'month': month + 1,
             'inflow': inflow,
@@ -26,6 +30,7 @@ def calculate_cash_flow(initial_investment, monthly_inflows, monthly_outflows, y
         })
 
     return cash_flow
+
 
 def calculate_net_present_value(initial_investment, monthly_inflows, monthly_outflows, years, discount_rate):
     """
@@ -48,6 +53,7 @@ def calculate_net_present_value(initial_investment, monthly_inflows, monthly_out
         inflow = monthly_inflows
         outflow = monthly_outflows
         cash_flow = inflow - outflow
-        npv += cash_flow / (1 + discount_rate) ** (month + 1)
+        # Apply monthly discount rate
+        npv += cash_flow / (1 + discount_rate / 12) ** (month + 1)
 
     return npv
